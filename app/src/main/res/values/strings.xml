@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Earthquake Scanner</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="last_hr">1 hr</string>
+    <string name="last_hr_desc">Past 1hr Analysis</string>
+    <string name="last_12hr">12 hr</string>
+    <string name="last_12hr_desc">Past 12 hr Analysis</string>
+    <string name="last_24hr">24 hr</string>
+    <string name="last_24hr_5mag">24 hr > 5 mag</string>
+    <string name="last_24hr_5mag_desc">Past 24 hr Analysis with mag greater than 5</string>
+    <string name="last_24hr_desc">Past 24 hr Analysis</string>
+    <string name="customize">Customize</string>
+    <string name="customize_desc">Customize your Analysis</string>
+    <string name="web">Visit Website</string>
+    <string name="web_desc">Visit USGS for more info</string>
+    <string name="date_range">Select Date Range</string>
+    <string name="date_hint">Selected Date Range</string>
+    <string name="time_range">Select Time Range</string>
+    <string name="time_hint">Selected Time Range</string>
+    <string name="select_city">Select City</string>
+    <string name="city_hint">Selected City</string>
+    <string name="radius">Selected Distance (miles)</string>
+</resources>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dhirajnayak.com.earthquakescanner.customizeScreen.CustomizeActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <Button
+            android:id="@+id/pickCity"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/select_city"
+            android:textColor="#FFFFFF"
+            android:fontFamily="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttonshape" />
+        <EditText
+            android:id="@+id/textPickCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/city_hint"
+            android:textAlignment="center"
+            android:enabled="false"/>
+        <Button
+            android:id="@+id/pickDate"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/date_range"
+            android:textColor="#FFFFFF"
+            android:fontFamily="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttonshape" />
+        <EditText
+            android:id="@+id/textPickDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/date_hint"
+            android:textAlignment="center"
+            android:enabled="false"/>
+        <Button
+            android:id="@+id/pickTime"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/time_range"
+            android:textColor="#FFFFFF"
+            android:fontFamily="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttonshape" />
+        <EditText
+            android:id="@+id/textPickTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/time_hint"
+            android:textAlignment="center"
+            android:enabled="false"/>
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+            android:id="@+id/seekbarRadius"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dsb_min="100"
+            app:dsb_max="1000"
+            />
+        <EditText
+            android:id="@+id/textRadius"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/radius"
+            android:textAlignment="center"
+            android:enabled="false"/>
+
+    </LinearLayout>
+    </ScrollView>
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@android:drawable/ic_menu_send"
+        app:fab_colorNormal="@color/colorPrimaryDark"/>
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit_customize"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorPrimaryDark"
+        android:visibility="invisible"/>
+
+
+</FrameLayout>
