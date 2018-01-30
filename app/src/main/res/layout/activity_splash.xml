@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/splash"
         android:layout_gravity="center"
-        android:scaleType="fitXY"/>
+        android:scaleType="centerCrop"/>
 
     <com.github.ybq.android.spinkit.SpinKitView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,6 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:SpinKit_Color="@color/colorRed" />
+        app:SpinKit_Color="@color/colorPrimary" />
 
 </FrameLayout>
