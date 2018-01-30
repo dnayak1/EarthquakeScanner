@@ -11,7 +11,7 @@ import android.net.NetworkInfo;
 
 public class Connection implements IConnection {
 
-    Context context;
+    private Context context;
 
     public Connection(Context context) {
         this.context = context;
@@ -23,15 +23,21 @@ public class Connection implements IConnection {
         boolean wifiAvailable = false;
         boolean mobileAvailable = false;
         ConnectivityManager conManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo[] networkInfo = conManager.getAllNetworkInfo();
-        for (NetworkInfo netInfo : networkInfo) {
-            if (netInfo.getTypeName().equalsIgnoreCase("WIFI"))
-                if (netInfo.isConnected())
-                    wifiAvailable = true;
-            if (netInfo.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (netInfo.isConnected())
-                    mobileAvailable = true;
+        if(conManager!=null){
+            NetworkInfo[] networkInfo = conManager.getAllNetworkInfo();
+            for (NetworkInfo netInfo : networkInfo) {
+                if (netInfo.getTypeName().equalsIgnoreCase("WIFI"))
+                    if (netInfo.isConnected())
+                        wifiAvailable = true;
+                if (netInfo.getTypeName().equalsIgnoreCase("MOBILE"))
+                    if (netInfo.isConnected())
+                        mobileAvailable = true;
+            }
+            return (wifiAvailable || mobileAvailable);
         }
-        return wifiAvailable || mobileAvailable;
+        return false;
+
     }
+
+
 }

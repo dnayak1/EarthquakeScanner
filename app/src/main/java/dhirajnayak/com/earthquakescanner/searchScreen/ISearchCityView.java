@@ -11,5 +11,5 @@ import dhirajnayak.com.earthquakescanner.model.City;
  */
 
 public interface ISearchCityView {
-    public void setCityRecyclerView(ArrayList<City> cities);
+    void setCityRecyclerView(ArrayList<City> cities);
 }

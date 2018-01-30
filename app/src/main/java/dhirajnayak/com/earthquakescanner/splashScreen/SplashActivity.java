@@ -2,8 +2,10 @@ package dhirajnayak.com.earthquakescanner.splashScreen;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,11 +25,14 @@ public class SplashActivity extends AppCompatActivity implements ISplashActivity
 
     SplashActivityPresenter presenter;
     SpinKitView spinKitView;
+    Snackbar snackbar;
+    View parentView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         spinKitView=findViewById(R.id.spin_kit);
+        parentView=findViewById(android.R.id.content);
         ISplashActivityView view=this;
         IConnection connection=new Connection(this);
         presenter=new SplashActivityPresenter(view,connection);
@@ -35,6 +40,7 @@ public class SplashActivity extends AppCompatActivity implements ISplashActivity
     }
 
     public void performInit(){
+        spinKitView.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
@@ -47,8 +53,17 @@ public class SplashActivity extends AppCompatActivity implements ISplashActivity
     //no internet connection
     @Override
     public void internetConnectionFailed() {
-        Toast.makeText(this,"Please make sure you are connected to Internet",Toast.LENGTH_LONG).show();
+        snackbar=Snackbar.make(parentView,"No Internet Connection",Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("RETRY", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                performInit();
+            }
+        });
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
         spinKitView.setVisibility(View.INVISIBLE);
+
     }
 
     //valid internet connection

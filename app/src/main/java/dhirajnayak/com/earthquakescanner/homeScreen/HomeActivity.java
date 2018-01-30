@@ -1,7 +1,9 @@
 package dhirajnayak.com.earthquakescanner.homeScreen;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -17,14 +19,19 @@ import dhirajnayak.com.earthquakescanner.R;
 import dhirajnayak.com.earthquakescanner.customizeScreen.CustomizeActivity;
 import dhirajnayak.com.earthquakescanner.mapScreen.MapsActivity;
 import dhirajnayak.com.earthquakescanner.model.GeoPlace;
+import dhirajnayak.com.earthquakescanner.utility.Connection;
 import dhirajnayak.com.earthquakescanner.utility.Constants;
+import dhirajnayak.com.earthquakescanner.utility.IConnection;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener,IHomeActivityView{
     //variables
     CardView oneHrCard,twelveHrCard,twentyFourHrCard,twentyFourHrMagCard,customizeCard,usgsCard;
     IHomeActivityPresenter presenter;
     IHomeActivityView view;
+    IConnection connection;
     SpinKitView spinKitHome;
+    View parentView;
+    Snackbar snackbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +43,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         customizeCard=findViewById(R.id.customizeCard);
         usgsCard=findViewById(R.id.usgsCard);
         spinKitHome=findViewById(R.id.spin_kit_home);
+        parentView=findViewById(android.R.id.content);
 
         view=this;
-        presenter=new HomeActivityPresenter(view);
+        connection=new Connection(this);
+        presenter=new HomeActivityPresenter(view,connection);
+
 
         oneHrCard.setOnClickListener(this);
         twelveHrCard.setOnClickListener(this);
@@ -107,6 +117,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
+    //no Connection
+    @Override
+    public void noInternetConnection() {
+        snackbar=Snackbar.make(parentView,"No Internet Connection",Snackbar.LENGTH_SHORT);
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
+        spinKitHome.setVisibility(View.INVISIBLE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
     //exit if back is pressed
     @Override
     public void onBackPressed() {
@@ -114,5 +134,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        connection.checkInternetConnection();
+        super.onResume();
     }
 }

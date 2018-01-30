@@ -2,6 +2,7 @@ package dhirajnayak.com.earthquakescanner.homeScreen;
 
 import dhirajnayak.com.earthquakescanner.model.City;
 import dhirajnayak.com.earthquakescanner.model.GeoPlace;
+import dhirajnayak.com.earthquakescanner.utility.IConnection;
 
 /**
  * Created by dhirajnayak on 1/28/18.
@@ -9,33 +10,48 @@ import dhirajnayak.com.earthquakescanner.model.GeoPlace;
  */
 
 public class HomeActivityPresenter implements IHomeActivityPresenter {
-    IHomeActivityView view;
-    IGeoPlaceRepository repository;
+    private IHomeActivityView view;
+    private IGeoPlaceRepository repository;
+    private IConnection connection;
 
-    public HomeActivityPresenter(IHomeActivityView view) {
+    public HomeActivityPresenter(IHomeActivityView view,IConnection connection) {
         this.view = view;
         repository=new GeoPlaceRepository(this);
+        this.connection=connection;
     }
 
     //querying with different parameters
     @Override
     public void getGeoPlaces(String startTime,String endTime) {
         view.showLoading();
-        repository.dataFromNetwork(startTime,endTime);
+        if(connection.checkInternetConnection()){
+            repository.dataFromNetwork(startTime,endTime);
+        }else{
+            view.noInternetConnection();
+        }
+
     }
 
     //querying with different parameters
     @Override
     public void getGeoPlacesWithMag(String startTime, String endTime, String minMagnitude) {
         view.showLoading();
-        repository.dataFromNetworkWithMag(startTime,endTime,minMagnitude);
+        if(connection.checkInternetConnection()) {
+            repository.dataFromNetworkWithMag(startTime, endTime, minMagnitude);
+        }else{
+            view.noInternetConnection();
+        }
     }
 
     //querying with different parameters
     @Override
     public void customizedGeoPlaces(String startTime, String endTime, String latitude, String longitude, String maxradiuskm) {
         view.showLoading();
-        repository.dataFromNetworkCustomized(startTime,endTime,latitude,longitude,maxradiuskm);
+        if(connection.checkInternetConnection()) {
+            repository.dataFromNetworkCustomized(startTime,endTime,latitude,longitude,maxradiuskm);
+        }else{
+            view.noInternetConnection();
+        }
     }
 
     //service successfully returns the response

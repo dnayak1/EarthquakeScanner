@@ -14,5 +14,5 @@ import io.reactivex.Observable;
  */
 
 public interface ICityRepository {
-    public Observable<ArrayList<City>> dataFromNetwork(String searchText);
+    Observable<ArrayList<City>> dataFromNetwork(String searchText);
 }

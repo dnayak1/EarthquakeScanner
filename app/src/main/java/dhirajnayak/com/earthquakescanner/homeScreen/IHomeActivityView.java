@@ -8,7 +8,8 @@ import dhirajnayak.com.earthquakescanner.model.GeoPlace;
  */
 
 public interface IHomeActivityView {
-    public void onGeoPlacesReceived(GeoPlace geoPlace);
-    public void showLoading();
-    public void hideLoading();
+    void onGeoPlacesReceived(GeoPlace geoPlace);
+    void showLoading();
+    void hideLoading();
+    void noInternetConnection();
 }

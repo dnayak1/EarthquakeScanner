@@ -9,9 +9,9 @@ import dhirajnayak.com.earthquakescanner.model.GeoPlace;
  */
 
 public interface IHomeActivityPresenter {
-    public void getGeoPlaces(String startTime,String endTime);
-    public void getGeoPlacesWithMag(String startTime,String endTime, String minMagnitude);
-    public void customizedGeoPlaces(String startTime,String endTime, String latitude,String longitude,String maxradiuskm);
-    public void onGeoPlacesReceived(GeoPlace place);
-    public boolean validateData(String startDate, String endDate ,String startTime,String endTime, City city);
+    void getGeoPlaces(String startTime,String endTime);
+    void getGeoPlacesWithMag(String startTime,String endTime, String minMagnitude);
+    void customizedGeoPlaces(String startTime,String endTime, String latitude,String longitude,String maxradiuskm);
+    void onGeoPlacesReceived(GeoPlace place);
+    boolean validateData(String startDate, String endDate ,String startTime,String endTime, City city);
 }

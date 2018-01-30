@@ -7,5 +7,5 @@ import dhirajnayak.com.earthquakescanner.model.GeoPlace;
  */
 
 public interface ISplashActivityPresenter {
-    public void isActiveConnection();
+    void isActiveConnection();
 }

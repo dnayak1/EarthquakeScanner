@@ -7,6 +7,6 @@ import dhirajnayak.com.earthquakescanner.model.GeoPlace;
  */
 
 public interface ISplashActivityView {
-    public void internetConnectionFailed();
-    public void internetConnectionSuccess();
+    void internetConnectionFailed();
+    void internetConnectionSuccess();
 }

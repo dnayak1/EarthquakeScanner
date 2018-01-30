@@ -1,6 +1,7 @@
 package dhirajnayak.com.earthquakescanner.customizeScreen;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,7 +30,9 @@ import dhirajnayak.com.earthquakescanner.mapScreen.MapsActivity;
 import dhirajnayak.com.earthquakescanner.model.City;
 import dhirajnayak.com.earthquakescanner.model.GeoPlace;
 import dhirajnayak.com.earthquakescanner.searchScreen.SearchCityActivity;
+import dhirajnayak.com.earthquakescanner.utility.Connection;
 import dhirajnayak.com.earthquakescanner.utility.Constants;
+import dhirajnayak.com.earthquakescanner.utility.IConnection;
 
 /**
         * Created by dhirajnayak on 1/28/18.
@@ -48,6 +51,9 @@ public class CustomizeActivity extends AppCompatActivity implements DatePickerDi
     City city;
     IHomeActivityPresenter presenter;
     IHomeActivityView view;
+    IConnection connection;
+    Snackbar snackbar;
+    View parentView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +72,9 @@ public class CustomizeActivity extends AppCompatActivity implements DatePickerDi
         send=findViewById(R.id.send);
 
         view=this;
-        presenter=new HomeActivityPresenter(view);
+        connection=new Connection(this);
+        presenter=new HomeActivityPresenter(view,connection);
+        parentView=findViewById(android.R.id.content);
 
         pickCity.setOnClickListener(this);
         pickDate.setOnClickListener(this);
@@ -180,6 +188,13 @@ public class CustomizeActivity extends AppCompatActivity implements DatePickerDi
     public void hideLoading() {
         spin_kit_customize.setVisibility(View.INVISIBLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    @Override
+    public void noInternetConnection() {
+        snackbar=Snackbar.make(parentView,"No Internet Connection",Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
     }
 
     @Override
