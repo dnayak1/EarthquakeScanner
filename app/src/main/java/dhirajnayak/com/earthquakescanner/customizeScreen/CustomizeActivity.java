@@ -154,7 +154,9 @@ public class CustomizeActivity extends AppCompatActivity implements DatePickerDi
                     double distance=1.6*radius;
                     presenter.customizedGeoPlaces(startDateTime,endDateTime,city.getLat(),city.getLon(),String.valueOf(distance));
                 }else{
-                    Toast.makeText(CustomizeActivity.this,"Invalid data",Toast.LENGTH_LONG).show();
+                    snackbar=Snackbar.make(parentView,"One or more fields are empty!",Snackbar.LENGTH_SHORT);
+                    snackbar.setActionTextColor(Color.RED);
+                    snackbar.show();
                 }
                 break;
         }
@@ -163,8 +165,10 @@ public class CustomizeActivity extends AppCompatActivity implements DatePickerDi
     //when city is selected
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        city= (City) data.getExtras().get(Constants.CITY_KEY);
-        textPickCity.setText(city.getName());
+        if(data!=null){
+            city= (City) data.getExtras().get(Constants.CITY_KEY);
+            textPickCity.setText(city.getName());
+        }
     }
 
     //calling map activity
@@ -172,6 +176,7 @@ public class CustomizeActivity extends AppCompatActivity implements DatePickerDi
     public void onGeoPlacesReceived(GeoPlace geoPlace) {
         Intent intent=new Intent(CustomizeActivity.this, MapsActivity.class);
         intent.putExtra(Constants.PLACES_KEY,geoPlace);
+        intent.putExtra(Constants.CITY_KEY,city);
         startActivity(intent);
     }
 
@@ -192,14 +197,45 @@ public class CustomizeActivity extends AppCompatActivity implements DatePickerDi
 
     @Override
     public void noInternetConnection() {
-        snackbar=Snackbar.make(parentView,"No Internet Connection",Snackbar.LENGTH_INDEFINITE);
+        spin_kit_customize.setVisibility(View.INVISIBLE);
+        snackbar=Snackbar.make(parentView,"No Internet Connection",Snackbar.LENGTH_SHORT);
         snackbar.setActionTextColor(Color.RED);
         snackbar.show();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    @Override
+    public void dataErrorOccurred() {
+        snackbar=Snackbar.make(parentView,"Error Occurred. Try Again!",Snackbar.LENGTH_SHORT);
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
+        spin_kit_customize.setVisibility(View.INVISIBLE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
     @Override
     protected void onResume() {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         super.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(Constants.START_DATE,startDate);
+        outState.putString(Constants.END_DATE,endDate);
+        outState.putString(Constants.START_TIME,startTime);
+        outState.putString(Constants.END_TIME,endTime);
+        outState.putSerializable(Constants.CITY,city);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        startDate=savedInstanceState.getString(Constants.START_DATE);
+        endDate=savedInstanceState.getString(Constants.END_DATE);
+        startTime=savedInstanceState.getString(Constants.START_TIME);
+        endTime=savedInstanceState.getString(Constants.END_TIME);
+        city= (City) savedInstanceState.getSerializable(Constants.CITY);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }

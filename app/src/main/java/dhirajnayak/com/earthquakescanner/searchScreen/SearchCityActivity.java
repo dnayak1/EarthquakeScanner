@@ -1,6 +1,8 @@
 package dhirajnayak.com.earthquakescanner.searchScreen;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -10,6 +12,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +20,9 @@ import java.util.concurrent.TimeUnit;
 import dhirajnayak.com.earthquakescanner.mapScreen.MapsActivity;
 import dhirajnayak.com.earthquakescanner.R;
 import dhirajnayak.com.earthquakescanner.model.City;
+import dhirajnayak.com.earthquakescanner.utility.Connection;
 import dhirajnayak.com.earthquakescanner.utility.Constants;
+import dhirajnayak.com.earthquakescanner.utility.IConnection;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -33,6 +38,9 @@ public class SearchCityActivity extends AppCompatActivity implements ISearchCity
     CityAdapter adapter;
     LinearLayoutManager layoutManager;
     DividerItemDecoration dividerItemDecoration;
+    IConnection connection;
+    Snackbar snackbar;
+    View parentView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +51,8 @@ public class SearchCityActivity extends AppCompatActivity implements ISearchCity
         ICityRepository repository=new CityRepository(this);
         ISearchCityView view=this;
         presenter=new SearchCityPresenter(repository,view);
+        connection=new Connection(this);
+        parentView=findViewById(android.R.id.content);
     }
 
     @Override
@@ -113,4 +123,13 @@ public class SearchCityActivity extends AppCompatActivity implements ISearchCity
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onResume() {
+        if(!connection.checkInternetConnection()){
+            snackbar= Snackbar.make(parentView,"No Internet Connection!",Snackbar.LENGTH_LONG);
+            snackbar.setActionTextColor(Color.RED);
+            snackbar.show();
+        }
+        super.onResume();
+    }
 }

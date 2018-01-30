@@ -73,4 +73,8 @@ public class HomeActivityPresenter implements IHomeActivityPresenter {
         }
         return false;
     }
+
+    public void OnDataError(){
+        view.dataErrorOccurred();
+    }
 }

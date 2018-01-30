@@ -120,12 +120,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     //no Connection
     @Override
     public void noInternetConnection() {
-        snackbar=Snackbar.make(parentView,"No Internet Connection",Snackbar.LENGTH_SHORT);
+        snackbar=Snackbar.make(parentView,"No Internet Connection!",Snackbar.LENGTH_SHORT);
         snackbar.setActionTextColor(Color.RED);
         snackbar.show();
         spinKitHome.setVisibility(View.INVISIBLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
+
+    @Override
+    public void dataErrorOccurred() {
+        snackbar=Snackbar.make(parentView,"Error Occurred. Try Again!",Snackbar.LENGTH_SHORT);
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
+        spinKitHome.setVisibility(View.INVISIBLE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
 
     //exit if back is pressed
     @Override

@@ -12,4 +12,5 @@ public interface IHomeActivityView {
     void showLoading();
     void hideLoading();
     void noInternetConnection();
+    void dataErrorOccurred();
 }

@@ -53,7 +53,7 @@ public class SplashActivity extends AppCompatActivity implements ISplashActivity
     //no internet connection
     @Override
     public void internetConnectionFailed() {
-        snackbar=Snackbar.make(parentView,"No Internet Connection",Snackbar.LENGTH_INDEFINITE);
+        snackbar=Snackbar.make(parentView,"No Internet Connection!",Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction("RETRY", new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Earthquake Scanner</string>
+    <string name="app_name">eScanner</string>
     <string name="title_activity_maps">Map</string>
     <string name="last_hr">1 hr</string>
     <string name="last_hr_desc">Past 1hr Analysis</string>
