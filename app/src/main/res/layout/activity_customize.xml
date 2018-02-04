@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dhirajnayak.com.earthquakescanner.customizeScreen.CustomizeActivity">
+    tools:context="dhirajnayak.com.earthquakeLocator.customizeScreen.CustomizeActivity">
 
     <ScrollView
         android:layout_width="match_parent"

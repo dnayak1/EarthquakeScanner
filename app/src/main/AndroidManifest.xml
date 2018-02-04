@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dhirajnayak.com.earthquakescanner">
+    package="dhirajnayak.com.earthquakeLocator">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".splashScreen.SplashActivity"
+            android:name="dhirajnayak.com.earthquakeLocator.splashScreen.SplashActivity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".searchScreen.SearchCityActivity"
+            android:name="dhirajnayak.com.earthquakeLocator.searchScreen.SearchCityActivity"
             android:theme="@style/SearchTheme" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -45,11 +45,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".mapScreen.MapsActivity"
+            android:name="dhirajnayak.com.earthquakeLocator.mapScreen.MapsActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity android:name=".homeScreen.HomeActivity" />
-        <activity android:name=".customizeScreen.CustomizeActivity"
+        <activity android:name="dhirajnayak.com.earthquakeLocator.homeScreen.HomeActivity" />
+        <activity android:name="dhirajnayak.com.earthquakeLocator.customizeScreen.CustomizeActivity"
             android:windowSoftInputMode="stateHidden"></activity>
     </application>
 

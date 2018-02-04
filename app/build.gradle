@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "dhirajnayak.com.earthquakescanner"
+        applicationId "dhirajnayak.com.earthquakeLocator"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -42,4 +42,6 @@ dependencies {
     implementation 'org.adw.library:discrete-seekbar:1.0.1'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.github.clans:fab:1.6.4'
+    // Mockito framework
+    testCompile 'org.mockito:mockito-core:1.10.19'
 }
